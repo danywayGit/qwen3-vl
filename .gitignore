@@ -1,0 +1,31 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+video_env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Analysis outputs - keep private for privacy
+/video_analysis/results/*
+!video_analysis/results/.gitkeep
+
+# Data files (videos, images) - too large for git
+/video_analysis/data/*
+!video_analysis/data/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
