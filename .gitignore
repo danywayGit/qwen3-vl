@@ -12,12 +12,12 @@ __pycache__/
 .Python
 
 # Analysis outputs - keep private for privacy
-/video_analysis/results/*
-!video_analysis/results/.gitkeep
+/visual_analysis/results/*
+!visual_analysis/results/.gitkeep
 
 # Data files (videos, images) - too large for git
-/video_analysis/data/*
-!video_analysis/data/.gitkeep
+/visual_analysis/data/*
+!visual_analysis/data/.gitkeep
 
 # IDE
 .vscode/

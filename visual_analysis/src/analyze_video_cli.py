@@ -3,8 +3,8 @@ Video Analysis CLI using Qwen3-VL via Ollama
 Analyzes videos to describe people, environment, actions, camera style, and camera movement.
 
 Usage:
-    python video_analysis/src/analyze_video_cli.py video.mp4
-    python video_analysis/src/analyze_video_cli.py video.mp4 --start 1:05 --end 2:45
+    python visual_analysis/src/analyze_video_cli.py video.mp4
+    python visual_analysis/src/analyze_video_cli.py video.mp4 --start 1:05 --end 2:45
 """
 import sys
 import os

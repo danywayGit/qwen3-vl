@@ -5,7 +5,7 @@ Based on: https://huggingface.co/Qwen/Qwen3-VL-32B-Instruct
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-from video_analysis.src.ollama_client import OllamaClient
+from visual_analysis.src.ollama_client import OllamaClient
 
 # Initialize with exact model name
 client = OllamaClient(model="qwen3-vl-8b-ctx32k:latest")

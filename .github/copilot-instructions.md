@@ -15,20 +15,20 @@ Video and image analysis tool using Qwen3-VL vision-language model via Ollama HT
 - **Models are managed externally**: All Ollama model definitions and Modelfiles are in the `OllamaTools` repository
 - **Do NOT create Modelfiles here**: Never generate or modify Ollama Modelfile configurations in this repo
 - **Model references only**: Only reference model names (e.g., `qwen3-vl-8b-ctx32k-explicit:latest`)
-- **config.json**: Update model name in `video_analysis/config.json` to switch models
+- **config.json**: Update model name in `visual_analysis/config.json` to switch models
 
 ### Architecture Principles
 - **Ollama HTTP API**: Use `/api/chat` endpoint (not `/api/generate`)
 - **Response parsing**: Qwen3-VL returns output in `"thinking"` field of JSON response
 - **No HuggingFace**: This project uses Ollama exclusively, not transformers/torch directly
-- **Config-driven**: Read settings from `video_analysis/config.json` when possible
+- **Config-driven**: Read settings from `visual_analysis/config.json` when possible
 
 ## Project Structure
 ```
 qwen3-vl/
 ├── .venv/                    # Virtual environment (REQUIRED, gitignored)
 ├── requirements.txt          # Python dependencies
-└── video_analysis/
+└── visual_analysis/
     ├── config.json           # Model & analysis settings
     ├── data/                 # Sample images/videos (gitignored)
     ├── results/              # Analysis outputs (gitignored for privacy)
@@ -63,13 +63,13 @@ analyzer = VideoAnalyzer(model_name="qwen3-vl-32b-ctx128k:latest")
 ### File Organization
 - **CLI files** (`analyze_image_cli.py`, `analyze_video_cli.py`): Standalone, include all logic
 - **VideoAnalyzer class**: Embedded in `analyze_video_cli.py` (not separate file)
-- **Output location**: All results auto-saved to `video_analysis/results/` (gitignored for privacy)
-- **Data files**: Videos/images in `video_analysis/data/` (gitignored, too large)
+- **Output location**: All results auto-saved to `visual_analysis/results/` (gitignored for privacy)
+- **Data files**: Videos/images in `visual_analysis/data/` (gitignored, too large)
 - **Virtual env name**: Always use `.venv` (not `venv` or `env`)
 
 ### Ollama Client Usage
 ```python
-from video_analysis.src.ollama_client import OllamaClient
+from visual_analysis.src.ollama_client import OllamaClient
 
 client = OllamaClient(model='qwen3-vl-8b-ctx32k-explicit:latest')
 response = client.generate(
@@ -87,21 +87,21 @@ response = client.generate(
 - **Video analysis**: ~3-4s per frame
 
 ## Testing Strategy
-- **Quick test**: `python video_analysis/tests/test_quick.py` (1-sentence output)
-- **Detailed test**: `python video_analysis/tests/test_detailed.py` (6-point analysis)
-- **Image CLI**: `python -m video_analysis.src.analyze_image_cli video_analysis/data/Goku1024.png`
-- **Video CLI**: `python -m video_analysis.src.analyze_video_cli video.mp4 --start 1:05 --end 2:45`
+- **Quick test**: `python visual_analysis/tests/test_quick.py` (1-sentence output)
+- **Detailed test**: `python visual_analysis/tests/test_detailed.py` (6-point analysis)
+- **Image CLI**: `python -m visual_analysis.src.analyze_image_cli visual_analysis/data/Goku1024.png`
+- **Video CLI**: `python -m visual_analysis.src.analyze_video_cli video.mp4 --start 1:05 --end 2:45`
 
 ## Common Tasks
 
 ### Adding New Analysis Features
 1. Update prompt in `analyze_image_cli.py` or `analyze_video_cli.py`
 2. Modify `VideoAnalyzer.analyze_video()` if frame processing changes
-3. Test with sample images/videos in `video_analysis/data/`
+3. Test with sample images/videos in `visual_analysis/data/`
 
 ### Changing Models
 1. **Do NOT modify this repo**: Update model in `OllamaTools` repo
-2. Update `video_analysis/config.json` with new model name
+2. Update `visual_analysis/config.json` with new model name
 3. Test with `python analyze_image.py <test_image>`
 
 ### Adding Dependencies

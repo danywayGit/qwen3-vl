@@ -9,10 +9,10 @@ Analyzes videos and images using Qwen3-VL via Ollama, providing detailed descrip
 ollama pull qwen3-vl:8b
 
 # 2. Analyze an image
-python -m video_analysis.src.analyze_image_cli video_analysis/data/Goku1024.png
+python -m visual_analysis.src.analyze_image_cli visual_analysis/data/Goku1024.png
 
 # 3. Analyze a video (time range 1:05 to 2:45)
-python -m video_analysis.src.analyze_video_cli video_analysis/data/test1.mp4 --start 1:05 --end 2:45 --interval 60
+python -m visual_analysis.src.analyze_video_cli visual_analysis/data/test1.mp4 --start 1:05 --end 2:45 --interval 60
 ```
 
 ## Model Configuration
@@ -57,7 +57,7 @@ qwen3-vl/
 ├── .venv/                    # Virtual environment (do not commit)
 ├── requirements.txt          # Python dependencies
 ├── README.md                 # This file
-└── video_analysis/
+└── visual_analysis/
     ├── config.json           # Model & analysis settings
     ├── data/                 # Sample images/videos (gitignored)
     ├── results/              # Analysis outputs (gitignored for privacy)
@@ -73,7 +73,7 @@ qwen3-vl/
 ## Configuration
 
 ### config.json
-The `video_analysis/config.json` file stores default settings:
+The `visual_analysis/config.json` file stores default settings:
 - **model.name**: Ollama model to use (e.g., `qwen3-vl-8b-ctx32k-explicit:latest`)
 - **model.parameters**: Temperature, top_p, top_k, repeat_penalty
 - **video_analysis.frame_interval**: Extract every N frames (default: 30)
@@ -86,25 +86,25 @@ The VideoAnalyzer automatically reads this file if no model name is provided.
 ### Image Analysis
 ```powershell
 # Basic usage
-python -m video_analysis.src.analyze_image_cli path/to/image.jpg
+python -m visual_analysis.src.analyze_image_cli path/to/image.jpg
 
 # With specific model
-python -m video_analysis.src.analyze_image_cli image.jpg qwen3-vl-8b-ctx32k:latest
+python -m visual_analysis.src.analyze_image_cli image.jpg qwen3-vl-8b-ctx32k:latest
 ```
 
 ### Video Analysis
 ```powershell
-# Full video (output auto-saved to video_analysis/results/)
-python -m video_analysis.src.analyze_video_cli video.mp4
+# Full video (output auto-saved to visual_analysis/results/)
+python -m visual_analysis.src.analyze_video_cli video.mp4
 
 # Time range (1:05 to 2:45)
-python -m video_analysis.src.analyze_video_cli video.mp4 --start 1:05 --end 2:45
+python -m visual_analysis.src.analyze_video_cli video.mp4 --start 1:05 --end 2:45
 
 # Custom interval (every 120 frames)
-python -m video_analysis.src.analyze_video_cli video.mp4 --interval 120
+python -m visual_analysis.src.analyze_video_cli video.mp4 --interval 120
 
 # Specify custom output path
-python -m video_analysis.src.analyze_video_cli video.mp4 --output my_analysis.json
+python -m visual_analysis.src.analyze_video_cli video.mp4 --output my_analysis.json
 ```
 
 ## Analysis Output

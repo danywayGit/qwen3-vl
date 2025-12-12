@@ -9,7 +9,7 @@ import sys
 # Add parent dir to path to import ollama_client
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from video_analysis.src.ollama_client import OllamaClient
+from visual_analysis.src.ollama_client import OllamaClient
 from PIL import Image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))

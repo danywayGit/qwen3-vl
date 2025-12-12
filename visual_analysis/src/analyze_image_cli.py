@@ -3,8 +3,8 @@ Image Analysis CLI using Qwen3-VL via Ollama
 Analyzes images to describe people, environment, actions, style, camera, lighting.
 
 Usage:
-    python video_analysis/src/analyze_image_cli.py image.jpg
-    python video_analysis/src/analyze_image_cli.py image.jpg qwen3-vl-8b-ctx32k:latest
+    python visual_analysis/src/analyze_image_cli.py image.jpg
+    python visual_analysis/src/analyze_image_cli.py image.jpg qwen3-vl-8b-ctx32k:latest
 """
 import sys
 import os
@@ -17,7 +17,7 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python analyze_image_cli.py <image_path> [model_name]")
         print("\nExamples:")
-        print("  python video_analysis/src/analyze_image_cli.py data/image.jpg")
+        print("  python visual_analysis/src/analyze_image_cli.py data/image.jpg")
         print("  python video_analysis/src/analyze_image_cli.py data/image.jpg qwen3-vl-8b-ctx32k:latest")
         sys.exit(1)
 
