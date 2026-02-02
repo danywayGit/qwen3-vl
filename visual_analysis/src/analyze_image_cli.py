@@ -80,16 +80,28 @@ Provide clear, specific descriptions."""
         print("\nAnalysis failed. Check that Ollama is running and the model is loaded.")
         sys.exit(1)
     else:
-        # Save result to JSON file
+        # Save result to JSON and Markdown files
         image_basename = os.path.splitext(os.path.basename(image_path))[0]
         results_dir = os.path.join(os.path.dirname(__file__), '..', 'results')
         os.makedirs(results_dir, exist_ok=True)
-        output_path = os.path.join(results_dir, f"{image_basename}_analysis.json")
         
-        with open(output_path, 'w', encoding='utf-8') as f:
+        # Save JSON
+        json_path = os.path.join(results_dir, f"{image_basename}_analysis.json")
+        with open(json_path, 'w', encoding='utf-8') as f:
             json.dump({"image": image_path, "model": model_name, "analysis": result}, f, indent=2, ensure_ascii=False)
         
-        print(f"\n✓ Results saved to: {output_path}")
+        # Save Markdown for easier reading
+        md_path = os.path.join(results_dir, f"{image_basename}_analysis.md")
+        with open(md_path, 'w', encoding='utf-8') as f:
+            f.write(f"# Image Analysis\n\n")
+            f.write(f"**Image:** `{image_path}`\n\n")
+            f.write(f"**Model:** `{model_name}`\n\n")
+            f.write(f"---\n\n")
+            f.write(result)
+        
+        print(f"\n✓ Results saved to:")
+        print(f"  - JSON: {json_path}")
+        print(f"  - Markdown: {md_path}")
         print("✓ Analysis completed successfully!")
 
 

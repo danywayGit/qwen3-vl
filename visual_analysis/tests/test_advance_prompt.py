@@ -118,9 +118,10 @@ Provide comprehensive analysis for accurate style recreation in AI image generat
     image_basename = os.path.splitext(os.path.basename(image_path))[0]
     results_dir = os.path.join(os.path.dirname(__file__), '..', 'results')
     os.makedirs(results_dir, exist_ok=True)
-    output_path = os.path.join(results_dir, f"{image_basename}_advanced_analysis.json")
     
-    with open(output_path, 'w', encoding='utf-8') as f:
+    # Save JSON
+    json_path = os.path.join(results_dir, f"{image_basename}_advanced_analysis.json")
+    with open(json_path, 'w', encoding='utf-8') as f:
         json.dump({
             "image": image_path, 
             "model": client.model, 
@@ -128,7 +129,19 @@ Provide comprehensive analysis for accurate style recreation in AI image generat
             "analysis": result
         }, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✓ Advanced analysis saved to: {output_path}")
+    # Save Markdown for easier reading
+    md_path = os.path.join(results_dir, f"{image_basename}_advanced_analysis.md")
+    with open(md_path, 'w', encoding='utf-8') as f:
+        f.write(f"# Advanced Image Analysis (ComfyUI-Ready)\n\n")
+        f.write(f"**Image:** `{image_path}`\n\n")
+        f.write(f"**Model:** `{client.model}`\n\n")
+        f.write(f"**Prompt Version:** `v3_comfyui_ready`\n\n")
+        f.write(f"---\n\n")
+        f.write(result)
+    
+    print(f"\n✓ Advanced analysis saved to:")
+    print(f"  - JSON: {json_path}")
+    print(f"  - Markdown: {md_path}")
     print("✓ Analysis complete! Use this for ComfyUI prompt generation.")
 
 

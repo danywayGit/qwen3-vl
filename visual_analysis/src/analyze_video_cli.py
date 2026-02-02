@@ -191,10 +191,31 @@ def main():
         print(f"\n--- Frame {i} (Time: {result.get('timestamp', 'N/A')}s) ---")
         print(result.get('analysis', 'No analysis available'))
     
+    # Save JSON
     with open(args.output, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✓ Results saved to: {args.output}")
+    # Save Markdown for easier reading
+    md_path = args.output.replace('.json', '.md')
+    with open(md_path, 'w', encoding='utf-8') as f:
+        f.write(f"# Video Analysis\n\n")
+        f.write(f"**Video:** `{args.video_path}`\n\n")
+        f.write(f"**Model:** `{analyzer.model_name}`\n\n")
+        f.write(f"**Frames Analyzed:** {len(results)}\n\n")
+        if start_time:
+            f.write(f"**Start Time:** {start_time}s\n\n")
+        if end_time:
+            f.write(f"**End Time:** {end_time}s\n\n")
+        f.write(f"---\n\n")
+        
+        for i, result in enumerate(results, 1):
+            f.write(f"## Frame {i} (Time: {result.get('timestamp', 'N/A')}s)\n\n")
+            f.write(result.get('analysis', 'No analysis available'))
+            f.write("\n\n---\n\n")
+    
+    print(f"\n✓ Results saved to:")
+    print(f"  - JSON: {args.output}")
+    print(f"  - Markdown: {md_path}")
     print(f"✓ Analysis complete! Processed {len(results)} frames.")
 
 
